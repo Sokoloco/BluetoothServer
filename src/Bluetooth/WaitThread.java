@@ -45,19 +45,23 @@ public class WaitThread implements Runnable {
                     InputStream inputStream = connection.openInputStream();
                     OutputStream os = connection.openOutputStream();
                     System.out.println("Connection Successful\nWaiting for compiler");
-                    byte data[] = "1".getBytes(StandardCharsets.ISO_8859_1);
-                    WaitThread.class.wait();
+                    byte data[] = "Compilation ready".getBytes(StandardCharsets.ISO_8859_1);
+                    //WaitThread.class.wait();
                     System.out.println("Proccess out");
 
                     while (true) {
+                        WaitThread.class.wait();
                         os.write(data);
                         int command = inputStream.read();
-                        System.out.println("This is the command " + command);
+                        //Run
+                        System.out.println("Go ahead");
                     }
             }
-        } catch (InterruptedException e) {
-                e.printStackTrace();
+        //}catch (InterruptedException e) {
+            //    e.printStackTrace();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
